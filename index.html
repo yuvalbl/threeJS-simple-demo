@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>
+		<script src="js/three.js"></script>
+		<script>
+			const scene = new THREE.Scene();
+			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+			const renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+
+			const cubes = [];
+			function addCube(geo, color, position) {
+				const material = new THREE.MeshBasicMaterial( { color: color } );
+				const cube = new THREE.Mesh( geo, material );
+				scene.add( cube );
+				cube.position.set(...position);
+
+				const wireframeMaterial = new THREE.LineBasicMaterial( { color: '#ffffff', linewidth: 15 } );
+				const wireframeGeo = new THREE.EdgesGeometry( geo );
+				const wireframe = new THREE.LineSegments( wireframeGeo, wireframeMaterial );
+				scene.add( wireframe );
+				wireframe.position.set(...position);
+
+				cubes.push({ cube, wireframe });
+			}
+
+			const unit = 1.2
+			const position1 = [unit, 0, 0];
+			const position2 = [unit, unit, 0];
+			const position3 = [0, unit/2, 0];
+
+
+			addCube(geometry, '#80476A', position1);
+			addCube(geometry, '#6EC5AF', position2);
+			addCube(geometry, '#F5A256', position3);
+			// addCube(geometry, '0x80476A', position3);
+
+			// const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+			// const material = new THREE.MeshBasicMaterial( { color: 0x80476A } );
+			// const cube = new THREE.Mesh( geometry, material );
+			// scene.add( cube );
+			// cube.position.set(...position1);
+
+			// const material2 = new THREE.MeshBasicMaterial( { color: 0x6EC5AF } );
+			// const cube2 = new THREE.Mesh( geometry, material2 );
+			// scene.add( cube2 );
+			// cube2.position.set(...position2);
+
+			// const geo = new THREE.EdgesGeometry( geometry ); // or WireframeGeometry( geometry )
+			// const mat = new THREE.LineBasicMaterial( { color: 0xffffff, linewidth: 15 } );
+			// const wireframe1 = new THREE.LineSegments( geo, mat );
+			// const wireframe2 = new THREE.LineSegments( geo, mat );
+			// const wireframe3 = new THREE.LineSegments( geo, mat );
+
+			// scene.add( wireframe1 );
+			// scene.add( wireframe2 );
+			// // scene.add( wireframe3 );
+			// wireframe1.position.set(...position1);
+			// wireframe2.position.set(...position2);
+			// wireframe3.position.set(...position3);
+			camera.position.z = 5;
+
+			function animate() {
+				requestAnimationFrame( animate );
+				cubes.forEach(c => {
+					c.cube.rotation.x += 0.02;
+					c.wireframe.rotation.x += 0.02;
+					c.cube.rotation.y += 0.01;
+					c.wireframe.rotation.y += 0.01;
+				})
+
+
+				// cube2.rotation.x += 0.02;
+				// wireframe2.rotation.x += 0.02;
+				// cube2.rotation.y += 0.01;
+				// wireframe2.rotation.y += 0.01;
+
+				renderer.render( scene, camera );
+			}
+			animate();
+		</script>
+	</body>
+</html>
