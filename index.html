@@ -45,31 +45,7 @@
 			addCube(geometry, '#80476A', position1);
 			addCube(geometry, '#6EC5AF', position2);
 			addCube(geometry, '#F5A256', position3);
-			// addCube(geometry, '0x80476A', position3);
-
-			// const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-			// const material = new THREE.MeshBasicMaterial( { color: 0x80476A } );
-			// const cube = new THREE.Mesh( geometry, material );
-			// scene.add( cube );
-			// cube.position.set(...position1);
-
-			// const material2 = new THREE.MeshBasicMaterial( { color: 0x6EC5AF } );
-			// const cube2 = new THREE.Mesh( geometry, material2 );
-			// scene.add( cube2 );
-			// cube2.position.set(...position2);
-
-			// const geo = new THREE.EdgesGeometry( geometry ); // or WireframeGeometry( geometry )
-			// const mat = new THREE.LineBasicMaterial( { color: 0xffffff, linewidth: 15 } );
-			// const wireframe1 = new THREE.LineSegments( geo, mat );
-			// const wireframe2 = new THREE.LineSegments( geo, mat );
-			// const wireframe3 = new THREE.LineSegments( geo, mat );
-
-			// scene.add( wireframe1 );
-			// scene.add( wireframe2 );
-			// // scene.add( wireframe3 );
-			// wireframe1.position.set(...position1);
-			// wireframe2.position.set(...position2);
-			// wireframe3.position.set(...position3);
+			
 			camera.position.z = 5;
 
 			function animate() {
@@ -80,12 +56,6 @@
 					c.cube.rotation.y += 0.01;
 					c.wireframe.rotation.y += 0.01;
 				})
-
-
-				// cube2.rotation.x += 0.02;
-				// wireframe2.rotation.x += 0.02;
-				// cube2.rotation.y += 0.01;
-				// wireframe2.rotation.y += 0.01;
 
 				renderer.render( scene, camera );
 			}
